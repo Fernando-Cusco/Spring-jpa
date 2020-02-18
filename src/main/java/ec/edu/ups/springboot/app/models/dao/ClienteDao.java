@@ -20,5 +20,10 @@ public class ClienteDao implements IClienteDao {
 	public List<Cliente> findAll() {
 		return em.createQuery("from Cliente").getResultList();
 	}
+	
+	@Transactional
+	public void save(Cliente cliente) {
+		em.persist(cliente);
+	}
 
 }
