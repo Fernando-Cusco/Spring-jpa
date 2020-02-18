@@ -32,42 +32,26 @@
 			class="text-primary border border-success border-top-0 border-left-0 border-right-0"
 			th:text="${titulo}"></h1>
 
-
-		<table class="table table-striped">
-			<thead>
+		<form th:action="@{/form}" th:object="${cliente}" method="post">
+			<table>
+				<input type="hidden" th:field="*{id}" />
 				<tr>
-					<th>Id</th>
-					<th>Nombres</th>
-					<th>Apellidos</th>
-					<th>Email</th>
-					<th>Fecha</th>
+					<td>Nombres</td>
+					<td><input class="form-control" type="text" th:field=*{nombre} /></td>
 				</tr>
-			</thead>
-
-			<tbody>
-				<tr th:each="cliente: ${clientes}">
-					<td th:text="${cliente.id}"></td>
-					<td th:text="${cliente.nombre}"></td>
-					<td th:text="${cliente.apellido}"></td>
-					<td th:text="${cliente.email}"></td>
-					<td th:text="${cliente.createAt}"></td>
+				<tr>
+					<td>Apellidos</td>
+					<td><input class="form-control" type="text" th:field=*{apellido} /></td>
 				</tr>
-			</tbody>
-
-		</table>
+				<tr>
+					<td>Email</td>
+					<td><input class="form-control" type="email" th:field=*{email} /></td>
+				</tr>
+				<tr>
+					<td><input class="btn btn-danger"type="submit" value="Crear Cliente" /></td>
+				</tr>
+			</table>
+		</form>
 	</div>
-
-
-	<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-		integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-		integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-		integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-		crossorigin="anonymous"></script>
 </body>
 </html>

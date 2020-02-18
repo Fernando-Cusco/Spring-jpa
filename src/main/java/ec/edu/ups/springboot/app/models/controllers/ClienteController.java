@@ -26,12 +26,14 @@ public class ClienteController {
 		return "listar";
 	}
 	
+	/*
+	 * Este metodo solo llama al formulario o solo renderiza con un titulo
+	 */
 	@RequestMapping(value = "/form")
 	public String crear(Map<String, Object> model) {
 		Cliente cliente = new Cliente();
 		model.put("cliente", cliente);
 		model.put("titulo", "Formulario de cliente");
-		
 		return "form";
 	}
 	
