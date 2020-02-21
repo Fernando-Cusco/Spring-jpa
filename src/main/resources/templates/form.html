@@ -37,7 +37,7 @@
 			</ul>
 		</div>
 		<form th:action="@{/form}" th:object="${cliente}" method="post">
-			<input type="hidden" th:field="*{id}" />
+			
 
 			<div class="form-group">
 				<label class="col-form-label col-sm-2">Nombres</label>
@@ -72,7 +72,7 @@
 			</div>
 			
 			<div class="col-sm-6">
-				<input class="btn btn-danger" type="submit" value="Crear Cliente" />
+				<input class="btn btn-danger" type="submit" th:value="${btn}" />
 			</div>
 
 		</form>
