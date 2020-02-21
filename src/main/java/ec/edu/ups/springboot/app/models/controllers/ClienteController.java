@@ -15,21 +15,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
-import ec.edu.ups.springboot.app.models.dao.IClienteDao;
+import ec.edu.ups.springboot.app.models.dao.IclienteService;
 import ec.edu.ups.springboot.app.models.entity.Cliente;
+import ec.edu.ups.springboot.app.models.service.IClienteService;
 
 @Controller
 @SessionAttributes("cliente")
 public class ClienteController {
 
 	@Autowired
-	@Qualifier("clientedaojpa")
-	private IClienteDao clienteDao;
+	private IClienteService clienteService;
 
 	@RequestMapping(value = "listar", method = RequestMethod.GET)
 	public String listar(Model model) {
 		model.addAttribute("titulo", "Clientes");
-		model.addAttribute("clientes", clienteDao.findAll());
+		model.addAttribute("clientes", clienteService.findAll());
 		return "listar";
 	}
 
@@ -51,15 +51,15 @@ public class ClienteController {
 			model.addAttribute("titulo", "Formulario clientes");
 			return "form";
 		}
-		clienteDao.save(cliente);
-		status.setComplete();																				//session atribute elimana el objeto cliente
+		clienteService.save(cliente);
+		status.setComplete(); // session atribute elimana el objeto cliente
 		return "redirect:listar";
 	}
 
 	@RequestMapping(value = "/form/{id}")
 	public String editar(@PathVariable(value = "id") Long id, Model model) {
-		if(id > 0) {
-			Cliente cliente = clienteDao.findOne(id);
+		if (id > 0) {
+			Cliente cliente = clienteService.findOne(id);
 			model.addAttribute("cliente", cliente);
 			model.addAttribute("btn", "Editar Cliente");
 			model.addAttribute("titulo", "Editar cliente");
@@ -68,14 +68,13 @@ public class ClienteController {
 		}
 		return "form";
 	}
-	
+
 	@RequestMapping(value = "/eliminar/{id}")
 	public String eliminar(@PathVariable(value = "id") Long id) {
-		if(id > 0) {
-			clienteDao.delete(id);
+		if (id > 0) {
+			clienteService.delete(id);
 		}
 		return "redirect:/listar";
 	}
-	
 
 }

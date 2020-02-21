@@ -16,17 +16,14 @@ public class ClienteDao implements IClienteDao {
 	@PersistenceContext
 	private EntityManager em;
 
-	@Transactional(readOnly = true)
 	public List<Cliente> findAll() {
 		return em.createQuery("from Cliente").getResultList();
 	}
 
-	@Transactional(readOnly = true)
 	public Cliente findOne(Long id) {
 		return em.find(Cliente.class, id);
 	}
-	
-	@Transactional
+
 	public void save(Cliente cliente) {
 		if (cliente.getId() != null && cliente.getId() > 0) {
 			em.merge(cliente);
@@ -35,7 +32,6 @@ public class ClienteDao implements IClienteDao {
 		}
 	}
 
-	@Transactional
 	public void delete(Long id) {
 		Cliente cliente = findOne(id);
 		em.remove(cliente);
