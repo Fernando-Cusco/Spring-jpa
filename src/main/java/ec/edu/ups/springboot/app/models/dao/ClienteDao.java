@@ -21,6 +21,11 @@ public class ClienteDao implements IClienteDao {
 		return em.createQuery("from Cliente").getResultList();
 	}
 
+	@Transactional(readOnly = true)
+	public Cliente findOne(Long id) {
+		return em.find(Cliente.class, id);
+	}
+	
 	@Transactional
 	public void save(Cliente cliente) {
 		if (cliente.getId() != null && cliente.getId() > 0) {
@@ -30,8 +35,10 @@ public class ClienteDao implements IClienteDao {
 		}
 	}
 
-	public Cliente findOne(Long id) {
-		return em.find(Cliente.class, id);
+	@Transactional
+	public void delete(Long id) {
+		Cliente cliente = findOne(id);
+		em.remove(cliente);
 	}
 
 }
